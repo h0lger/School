@@ -1,8 +1,4 @@
-# Programmeringsteknik webbkurs KTH inlämningsuppgift 2.
-# David Bengtsson
-# 2014-01-27
 # Läser in 4 meningar och skapar en 'rondelet' dikt
-
 
 # VARIABLER
 sentence = 4*[None] # Antal meningar

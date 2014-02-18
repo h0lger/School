@@ -1,6 +1,3 @@
-# Programmeringsteknik webbkurs KTH inlämningsuppgift 1.
-# David Bengtsson
-# 2014-01-18
 # Låter användaren mata in talet N och beräknar kvadraten på N
 
 print("Välkommen till prat i kvadrat beta.")
