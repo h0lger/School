@@ -4,6 +4,10 @@
 from random import randint
 import operator
 from audioop import reverse
+from copy import deepcopy
+
+#Globala variabler
+MAX_STEG = 25
 
 # En klass som ska representera en hög med kort
 class Hog:
@@ -36,24 +40,28 @@ def slumpa_startfordelning():
 
 # Tar ett kort från varje hög och skapar en ny hög
 def ta_kort(i_hogar):
-    tmp_hogar = i_hogar #Den nya fördelningen efter vi tagit ett kort från varje hög
+    #Skapa en kopia först för att inte manipulera ursprunget
+    #Kopian ska innehålla den nya fördelningen efter vi tagit ett kort från varje hög
+    tmp_hogar = deepcopy(i_hogar) 
     tagna_kort = 0
     
     for hog in tmp_hogar:
-        tagna_kort += 1 #Ta ett kort från varje hög
-        hog.antal_kort -= 1 #Minska varje hög med ett kort      
-        
-    tmp_hogar.append(Hog(tagna_kort)) #Skapa en ny hög med de tagna korten
+        if hog.antal_kort > 0:
+            tagna_kort += 1 #Ta ett kort från varje hög
+            hog.antal_kort -= 1 #Minska varje hög med ett kort      
+    
+    if tagna_kort > 0:
+        tmp_hogar.append(Hog(tagna_kort)) #Skapa en ny hög med de tagna korten
     
     #Ta bort eventuella tomma högar
-    tmp_hogar = tabort_tomma_hogar(tmp_hogar)
+    tmp_hogar_utan_tomma = tabort_tomma_hogar(tmp_hogar)
         
-    return tmp_hogar
+    return tmp_hogar_utan_tomma
 
 # Går igenom högarna för att kontrollera om vi har ett stabilt läge
 # Stabilt läge uppnås när antalet högar och antalet kort är konstant
 def kontrollera_stabiltLage(i_hogar):
-    stabilt_lage_funnit = 0
+    stabilt_lage_funnit = 0    
     tmp_hog = ta_kort(i_hogar)
     if jamfor_hogar(tmp_hog, i_hogar) == 1:
         #De är lika vilken innebär att det mycket väl kan vara ett stabilt läge
@@ -86,7 +94,8 @@ def jamfor_hogar(i_hog_1, i_hog_2):
 
 # Går igenom samtliga högar och tar bort högar med 0 kort
 def tabort_tomma_hogar(i_hogar):
-    tmp_hogar = i_hogar #Lista där vi tar bort de tomma högarna
+    #Först skapar vi upp en kopia av listan, då vi inte vill manipulera ursprungslistan
+    tmp_hogar = deepcopy(i_hogar)    
     
     for hog in tmp_hogar:
         # Om högen inte har några kort så tar vi bort den
@@ -98,8 +107,9 @@ def tabort_tomma_hogar(i_hogar):
 # Srkiver ut samtliga högar i en lista, dvs antalet kort i alla högar (i storleksordning).
 # T.ex. 4 3 2 1
 def skriv_ut_hogar(i_hogar):
+    tmp_hogar = deepcopy(i_hogar) #Kopia för att inte manipulera ogrinalet
     #Sortera högarna i fallande ordning
-    sorterade_hogar = sorted(i_hogar, key=operator.attrgetter('antal_kort'), reverse=True)
+    sorterade_hogar = sorted(tmp_hogar, key=operator.attrgetter('antal_kort'), reverse=True)
     #Skriv ut alla högar i listan
     for hog in sorterade_hogar:
         print(hog, end=' ')
@@ -110,17 +120,13 @@ def skriv_ut_hogar(i_hogar):
 hogar = [] #En lista med alla högar (klasser)
 hogar =  slumpa_startfordelning()
 
-#TEST
-skriv_ut_hogar(hogar)
-hogar = ta_kort(hogar)
-skriv_ut_hogar(hogar)
-print(str(kontrollera_stabiltLage(hogar)))
+antal_steg = 0
 
-antalSteg = 0
-
-# while(antalSteg <= 25):
-#     kontrollera_stabiltLage()
-#     ta_kort()
-#     tabort_tomma_hogar()
-#     skriv_ut_hogar(hogar)
-#     antalSteg += 1
+while(antal_steg < MAX_STEG):
+    if kontrollera_stabiltLage(hogar) == 1:
+        print("Patiensen har gått ut efter {0} steg".format(str(antal_steg)))        
+        break
+    
+    hogar = ta_kort(hogar)    
+    skriv_ut_hogar(hogar)
+    antal_steg += 1
