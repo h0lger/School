@@ -1,4 +1,5 @@
 # P-uppgift "bulgarisk patiens" - KTH
+# David Bengtsson 
 
 #Importera biblotek
 from random import randint
@@ -20,21 +21,23 @@ class Hog:
 
 
 # Ska slumpa fram startfördelningen med högar och kort
-def slumpa_startfordelning():
-    tmp_hogar = [] #Lokal variabel för att skapa högar
-    #1. Slumpa fram antalet kort 2-52
-    antalKort = randint(2,52)
-    #2. Slumpa fram antalet högar 2-5
+def slumpa_startfordelning(antalKort):
+    tmp_hogar = [] #Lokal variabel för att skapa högar    
+    #1. Slumpa fram antalet högar 2-5
     antalHogar = randint(2,5)
-    #3. Fyll högarna med kort
+    #2. Fyll högarna med kort
     for i in range(0, antalHogar):
+        i += 1
         #Kontroll måste göras då den sista iterationen kan korten vara slut
-        if antalKort > 0:        
-            antalKortIHog = randint(1, antalKort) #Antal kort vi ska stoppa i denna högen
-            enHog = Hog(antalKortIHog) #Skapa en hög
-            antalKort -= antalKortIHog #Ta bort korten som vi lagt i aktuell hög
-            tmp_hogar.append(enHog)
-        i += 1    
+        if antalKort > 0:
+            #Om vi är på sista högen
+            if i == antalHogar:
+                enHog = Hog(antalKort) #Skapa en hög med de sista korten
+            else:
+                antalKortIHog = randint(1, antalKort) #Antal kort vi ska stoppa i denna högen            
+                enHog = Hog(antalKortIHog) #Skapa en hög
+                antalKort -= antalKortIHog #Ta bort korten som vi lagt i aktuell hög
+            tmp_hogar.append(enHog)            
     
     return tmp_hogar
 
@@ -55,8 +58,11 @@ def ta_kort(i_hogar):
     
     #Ta bort eventuella tomma högar
     tmp_hogar_utan_tomma = tabort_tomma_hogar(tmp_hogar)
+    
+    #Sortera högarna i fallande ordning
+    sorterade_hogar = sorted(tmp_hogar_utan_tomma, key=operator.attrgetter('antal_kort'), reverse=True)
         
-    return tmp_hogar_utan_tomma
+    return sorterade_hogar
 
 # Går igenom högarna för att kontrollera om vi har ett stabilt läge
 # Stabilt läge uppnås när antalet högar och antalet kort är konstant
@@ -95,9 +101,9 @@ def jamfor_hogar(i_hog_1, i_hog_2):
 # Går igenom samtliga högar och tar bort högar med 0 kort
 def tabort_tomma_hogar(i_hogar):
     #Först skapar vi upp en kopia av listan, då vi inte vill manipulera ursprungslistan
-    tmp_hogar = deepcopy(i_hogar)    
+    tmp_hogar = deepcopy(i_hogar)   
     
-    for hog in tmp_hogar:
+    for hog in tmp_hogar[:]:
         # Om högen inte har några kort så tar vi bort den
         if hog.antal_kort < 1:
             tmp_hogar.remove(hog)
@@ -106,27 +112,49 @@ def tabort_tomma_hogar(i_hogar):
 
 # Srkiver ut samtliga högar i en lista, dvs antalet kort i alla högar (i storleksordning).
 # T.ex. 4 3 2 1
-def skriv_ut_hogar(i_hogar):
-    tmp_hogar = deepcopy(i_hogar) #Kopia för att inte manipulera ogrinalet
-    #Sortera högarna i fallande ordning
-    sorterade_hogar = sorted(tmp_hogar, key=operator.attrgetter('antal_kort'), reverse=True)
+def skriv_ut_hogar(i_hogar):    
     #Skriv ut alla högar i listan
-    for hog in sorterade_hogar:
+    for hog in i_hogar:
         print(hog, end=' ')
     
     print("\n")
+    
+def skriv_ut_programinfo():
+    print("*************************************************")
+    print("* Välkommen till bulgarisk patiens              *")
+    print("* Du kommer att få välja antalet kort att spela *")
+    print("* med, därefter kommer spelet slumpa ut dina    *")
+    print("* kort i 2-5 olika högar.                       *")
+    print("*************************************************")
+    print("")
 
 #Huvudprogram
-hogar = [] #En lista med alla högar (klasser)
-hogar =  slumpa_startfordelning()
 
+skriv_ut_programinfo()
+
+hogar = [] #En lista med alla högar (klasser)
+antalKort = 0
+#Låter användaren välja hur många kort denne vill spela med
+while((antalKort < 2) or (antalKort > 52)):
+    antalKort = int(input("Hur många kort vill du spela med?"))
+    if((antalKort < 2) or (antalKort > 52)):
+        print("Du måste spela med 2-52 kort")
+
+
+hogar =  slumpa_startfordelning(int(antalKort))
+
+skriv_ut_hogar(hogar)
 antal_steg = 0
 
-while(antal_steg < MAX_STEG):
+while(antal_steg < MAX_STEG):    
+    
     if kontrollera_stabiltLage(hogar) == 1:
         print("Patiensen har gått ut efter {0} steg".format(str(antal_steg)))        
-        break
+        break    
     
     hogar = ta_kort(hogar)    
     skriv_ut_hogar(hogar)
     antal_steg += 1
+    if antal_steg == MAX_STEG:
+        print("Maximalt antal steg uppnått, bättre lycka nästa gång")
+    
