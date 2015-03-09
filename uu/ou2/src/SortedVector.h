@@ -14,10 +14,9 @@ public:
 	
 private:
 	T vec[size];	
-	int itemPos; //håller reda på sista elementet i vektorn
+	int itemPos; //håller reda på sista "verkliga" elementet i vektorn
 	void sort(); //sortera vektorn
 	void swap(T& a, T& b); //byta plats på objekt
-	
 };
 
 //implementationer
@@ -35,14 +34,13 @@ template<class T, int size> void SortedVector<T, size>::swap(T& a, T& b)
 
 template<class T, int size> void SortedVector<T, size>::sort()
 {
-	//Implementation av bubble sort
-	for(int top = itemPos - 1;top > 0;top--)
+	//implementation av instickningssortering	
+	for(int top = 1; top < itemPos; top++)
 	{
-		for(int i = 0;i < top;i++)
-		{
-				if(vec[i+1] < vec[i])
-					swap(vec[i], vec[i+1]);
-		}
+		for(int search = top-1;search >= 0 && vec[search+1] < vec[search];search--)
+			{
+				swap(vec[search], vec[search+1]);
+			}
 	}
 }
 
@@ -68,7 +66,28 @@ template<class T, int size> void SortedVector<T, size>::print(ostream &os)
 
 template<class T, int size> T& SortedVector<T, size>::median()
 {
+	int median = (itemPos - 1) / 2; //egentligen left + (right-left)/2
+	return vec[median];
+}
+
+template<class T, int size> void SortedVector<T, size>::removeLarger(const T &v)
+{
+	T tmp[size];
+	int j = 0;
+	//gå igenom vektorn
+	for(int i = 0;i < itemPos;i++)
+	{
+		//om den är mindre så behåller vi den
+		if(vec[i] <= v)
+			tmp[j++] = vec[i];
+	}
 	
+	//skiftar vector
+	if(j > 0)
+	{	
+		*vec = *tmp;
+		itemPos = j;
+	}
 }
 
 

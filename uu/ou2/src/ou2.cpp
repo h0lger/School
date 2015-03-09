@@ -8,9 +8,15 @@ int main()
   //SortedVector<Polygon,10> polygons;
   SortedVector<int,6> ints;
 
-  ints.add( 3 );  
+  ints.add( 3 );
+	ints.add(10);
   ints.add( 1 );  
   ints.add( 6 );
+	ints.print(cout);
+	
+	cout << "MEDIAN: " << ints.median() << endl;
+	
+	ints.removeLarger( 3 ); // 1 2 3
 	ints.print(cout);
 	
   /*Vertex varr[10];
