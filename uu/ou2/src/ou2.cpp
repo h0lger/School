@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-  //SortedVector<Polygon,10> polygons;
+  SortedVector<Polygon,10> polygons;
   SortedVector<int,6> ints;
 
   ints.add( 3 );
@@ -19,15 +19,18 @@ int main()
 	ints.removeLarger( 3 ); // 1 2 3
 	ints.print(cout);
 	
-  /*Vertex varr[10];
+  Vertex varr[10];
   varr[0] = Vertex(0,0); 
   varr[1] = Vertex(10,0);
   varr[2] = Vertex(5,2);
   varr[3] = Vertex(5,5);
+	Polygon pol(varr, 4);
+	
   polygons.add(Polygon( varr, 4) );
-  cout << (Polygon(varr,4)).area() << endl;
+  //cout << (Polygon(varr,4)).area() << endl;
 
-  varr[0] = Vertex(0,0); 
+  /*
+	varr[0] = Vertex(0,0); 
   varr[1] = Vertex(25,8);
   varr[2] = Vertex(10,23);
   polygons.add( Polygon( varr, 3) );

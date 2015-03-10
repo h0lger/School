@@ -6,6 +6,11 @@ Polygon::Polygon()
 	_count = 0;
 };
 
+Polygon::Polygon(const Polygon& pol)
+{
+	std::cout << "Kopieringskonstruktor";
+}
+
 /*Polygon::Polygon(std::initializer_list<Vertex> li)
 {
 	//Bara för att testa nytt "sätt" 
@@ -16,6 +21,12 @@ Polygon::Polygon()
 
 	_count = li.size();
 }*/
+
+Polygon& Polygon::operator =(const Polygon& pol)
+{
+	std::cout << "Tilldelningsoperator";
+	return *this;
+}
 
 Polygon::Polygon(Vertex vA[], int antal)
 {
@@ -82,27 +93,27 @@ int Polygon::numVertices()
 	return _count;
 }
 
-int Polygon::miny()
+int Polygon::miny() const
 {
 	return getMinMax(Y, Min);
 }
 
-int Polygon::maxy()
+int Polygon::maxy() const
 {
 	return getMinMax(Y, Max);	
 }
 
-int Polygon::minx()
+int Polygon::minx() const
 {
 	return getMinMax(X, Min);	
 }
 
-int Polygon::maxx()
+int Polygon::maxx() const
 {
 	return getMinMax(X, Max);		
 }
 
-int Polygon::getMinMax(Coordinate crd, MinMax m)
+int Polygon::getMinMax(Coordinate crd, MinMax m) const
 {
 	int minmax = 0;
 	int tmp = 0;
@@ -126,4 +137,9 @@ int Polygon::getMinMax(Coordinate crd, MinMax m)
 	}
 
 	return minmax;
+}
+
+bool Polygon::operator <(const Polygon& pol) const
+{
+	return (maxy() < pol.maxy() && maxx() < pol.maxx());	
 }
