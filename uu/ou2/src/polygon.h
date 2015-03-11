@@ -11,9 +11,7 @@ public:
 	Polygon();
 	Polygon(const Polygon& pol); //kopieringskonstruktor	
 	Polygon(Vertex[], int);
-	~Polygon();
-	bool operator<(const Polygon& pol) const;
-	Polygon& operator=(const Polygon& pol); //tilldelningsoperator
+	~Polygon();	
 
 	//metoder
 	void add(Vertex);
@@ -22,7 +20,10 @@ public:
 	int miny() const;
 	int maxy() const;
 	int minx() const;
-	int maxx() const;	
+	int maxx() const;
+	bool operator<(const Polygon& pol) const;
+	Polygon& operator=(const Polygon& pol); //tilldelningsoperators
+	friend std::ostream& operator<<(std::ostream& os, const Polygon& pol);
 
 private:
 	Vertex *_vArr;

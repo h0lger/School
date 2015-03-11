@@ -19,4 +19,11 @@ Vertex::Vertex(int x, int y)
 int Vertex::X() { return _x; }
 int Vertex::Y() { return _y; }
 
+std::ostream& operator<<(std::ostream& os, const Vertex& ver)
+{
+	os << "(" << ver._x << "," << ver._y << ")";
+	
+	return os;
+}
+
 

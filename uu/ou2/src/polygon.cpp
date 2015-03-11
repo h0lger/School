@@ -11,25 +11,8 @@ Polygon::Polygon(const Polygon& pol)
 	std::cout << "Kopieringskonstruktor";
 }
 
-/*Polygon::Polygon(std::initializer_list<Vertex> li)
-{
-	//Bara för att testa nytt "sätt" 
-	_vArr = new Vertex[li.size() - 1];
-	int i = -1;
-	for(Vertex v: li)
-		_vArr[i++] = v;
-
-	_count = li.size();
-}*/
-
-Polygon& Polygon::operator =(const Polygon& pol)
-{
-	std::cout << "Tilldelningsoperator";
-	return *this;
-}
-
 Polygon::Polygon(Vertex vA[], int antal)
-{
+{	
 	_vArr = new Vertex[antal - 1];
 
 	for (int i = 0; i < antal; i++)
@@ -42,10 +25,28 @@ Polygon::Polygon(Vertex vA[], int antal)
 
 Polygon::~Polygon()
 {
-	delete [] _vArr;
+	//delete [] _vArr;
 };
 
 //metoder
+Polygon& Polygon::operator =(const Polygon& pol)
+{	
+	_count = 0;
+	_vArr = new Vertex[pol._count];
+	//kopiera över vertex vektorn
+	for(int i = 0;i<pol._count;i++)
+	{
+		_vArr[i] = pol._vArr[i];
+		_count++;
+	}
+	
+	//Kontroll
+	if(_count != pol._count)
+		std::cerr << "Fel vid tilldelningoperator\n";
+	
+	return *this;
+}
+
 void Polygon::add(Vertex v)
 {		
 	Vertex* tmp = new Vertex[_count + 1]();
@@ -142,4 +143,17 @@ int Polygon::getMinMax(Coordinate crd, MinMax m) const
 bool Polygon::operator <(const Polygon& pol) const
 {
 	return (maxy() < pol.maxy() && maxx() < pol.maxx());	
+}
+
+std::ostream& operator <<(std::ostream& os, const Polygon& pol)
+{
+	os << "{";
+	for(int i = 0; i < pol._count; i++)
+	{
+		os << pol._vArr[i] << " ";
+	}
+	
+	os << "}";
+	
+	return os;
 }
