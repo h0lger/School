@@ -5,11 +5,12 @@ class Vertex
 {
 public:
 	Vertex();
-	Vertex(const Vertex &);
+	Vertex(const Vertex &); //kopieringskonstruktor
 	Vertex(int, int);
 	~Vertex();
 
 	//metoder
+	const Vertex& operator=(const Vertex& v);
 	int X();
 	int Y();
 	

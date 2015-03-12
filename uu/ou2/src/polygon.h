@@ -22,7 +22,7 @@ public:
 	int minx() const;
 	int maxx() const;
 	bool operator<(const Polygon& pol) const;
-	Polygon& operator=(const Polygon& pol); //tilldelningsoperators
+	const Polygon& operator=(const Polygon& pol); //tilldelningsoperator
 	friend std::ostream& operator<<(std::ostream& os, const Polygon& pol);
 
 private:

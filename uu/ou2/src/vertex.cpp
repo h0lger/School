@@ -1,7 +1,7 @@
 #include "vertex.h"
 
 //konstruktorer
-Vertex::Vertex() {};
+Vertex::Vertex() { };
 Vertex::Vertex(const Vertex &v)
 {
 	_x = v._x;
@@ -18,6 +18,17 @@ Vertex::Vertex(int x, int y)
 //metoder
 int Vertex::X() { return _x; }
 int Vertex::Y() { return _y; }
+
+const Vertex& Vertex::operator =(const Vertex& v)
+{	
+	if(this != &v)
+	{
+		_x = v._x;
+		_y = v._y;
+	}
+	
+	return *this;
+}
 
 std::ostream& operator<<(std::ostream& os, const Vertex& ver)
 {

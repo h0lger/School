@@ -21,13 +21,13 @@ private:
 
 //implementationer
 template<class T, int size> SortedVector<T, size>::SortedVector()
-{	
+{
 	itemPos = 0;
 }
 
 template<class T, int size> void SortedVector<T, size>::swap(T& a, T& b)
 {
-	T tmp = a;
+	T tmp(a);
 	a = b;
 	b = tmp;
 }
@@ -48,7 +48,7 @@ template<class T, int size> bool SortedVector<T, size>::add(const T& v)
 {
 	if(itemPos + 1 < size)
 	{
-		vec[itemPos++] = v;
+		vec[itemPos++] = T(v);
 		sort(); //sortera vektorn
 		return true;
 	}

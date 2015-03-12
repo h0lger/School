@@ -3,17 +3,23 @@
 //konstruktorer
 Polygon::Polygon()
 {
+	_vArr = 0;
 	_count = 0;
 };
 
 Polygon::Polygon(const Polygon& pol)
-{
-	std::cout << "Kopieringskonstruktor";
+{	
+	_count = pol._count;
+	_vArr = new Vertex[_count];
+	for(int i = 0;i < pol._count; i++)
+	{
+		_vArr[i] = pol._vArr[i];
+	}
 }
 
 Polygon::Polygon(Vertex vA[], int antal)
 {	
-	_vArr = new Vertex[antal - 1];
+	_vArr = new Vertex[antal];
 
 	for (int i = 0; i < antal; i++)
 	{
@@ -24,27 +30,31 @@ Polygon::Polygon(Vertex vA[], int antal)
 }
 
 Polygon::~Polygon()
-{
-	//delete [] _vArr;
+{	
+	delete [] _vArr;
 };
 
 //metoder
-Polygon& Polygon::operator =(const Polygon& pol)
-{	
-	_count = 0;
-	_vArr = new Vertex[pol._count];
-	//kopiera över vertex vektorn
-	for(int i = 0;i<pol._count;i++)
+const Polygon& Polygon::operator =(const Polygon& pol)
+{
+	if(this != &pol)
 	{
-		_vArr[i] = pol._vArr[i];
-		_count++;
+		_count = 0;
+		delete [] _vArr;
+		_vArr = new Vertex[pol._count];
+		//kopiera över vertex vektorn
+		for(int i = 0;i < pol._count; i++)
+		{
+			_vArr[i] = pol._vArr[i];
+			_count++;
+		}
+		
+		//Kontroll
+		if(_count != pol._count)
+			std::cerr << "Fel vid tilldelningoperator\n";	
 	}
-	
-	//Kontroll
-	if(_count != pol._count)
-		std::cerr << "Fel vid tilldelningoperator\n";
-	
-	return *this;
+		
+	return *this; //för att tillåta kedjade tilldelningar	
 }
 
 void Polygon::add(Vertex v)
@@ -57,13 +67,12 @@ void Polygon::add(Vertex v)
 		tmp[i] = _vArr[i];
 	}
 	
-	//lägg till ny
-	tmp[_count] = v;
+	//lägg till ny	
+	tmp[_count] = Vertex(v.X(), v.Y());
 		
 	
 	//rensa gammal
-	if(_count > 0)
-		delete[] _vArr;
+	delete[] _vArr;
 	
 	_count++;
 	
@@ -141,7 +150,7 @@ int Polygon::getMinMax(Coordinate crd, MinMax m) const
 }
 
 bool Polygon::operator <(const Polygon& pol) const
-{
+{	
 	return (maxy() < pol.maxy() && maxx() < pol.maxx());	
 }
 
