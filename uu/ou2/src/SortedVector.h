@@ -71,23 +71,27 @@ template<class T, int size> T& SortedVector<T, size>::median()
 }
 
 template<class T, int size> void SortedVector<T, size>::removeLarger(const T &v)
-{
-	T tmp[size];
-	int j = 0;
+{	
+	int j = 0; //sista positionen som ska behållas
+	
 	//gå igenom vektorn
 	for(int i = 0;i < itemPos;i++)
-	{
-		//om den är mindre så behåller vi den
-		if(vec[i] <= v)
-			tmp[j++] = vec[i];
+	{		
+		if(vec[i] > v)
+		{
+			j = itemPos - 1;
+			break; //gå ur loopen när vi hittat
+		}
 	}
 	
-	//skiftar vector
-	if(j > 0)
-	{	
-		*vec = *tmp;
-		itemPos = j;
+	//rensa alla större än v
+	for(int i = j;i < itemPos;i++)
+	{
+		vec[i] = 0;
 	}
+
+	//sätt om positionen
+	itemPos = j;
 }
 
 
