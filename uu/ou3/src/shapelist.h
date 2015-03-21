@@ -1,4 +1,5 @@
-#ifndef SHAPE_LIST
+#ifndef SHAPE_LIST_H
+#define SHAPE_LIST_H
 #include "shape.h"
 #include "vertex.h"
 class ShapeList
