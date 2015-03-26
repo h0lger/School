@@ -2,6 +2,7 @@
 #define SHAPE_LIST_H
 #include "shape.h"
 #include "vertex.h"
+#include "node.h"
 class ShapeList
 {
 public:
@@ -13,5 +14,8 @@ public:
 	void remove( const Vertex &v); // ta bort alla figurer "nära" v
 	double area(); // returnerar den totala ytan av alla figurer
 	void print(); // skriv ut listan
+	
+private:
+	Node _node; //håller samman den länkade listan
 };
 #endif

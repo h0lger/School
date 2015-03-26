@@ -7,6 +7,17 @@ Polygon::Polygon(double x, double y, Vertex *v, int num) : Shape(x, y)
 	_count = num;
 }
 
+Polygon::Polygon(const Polygon &p) : Shape(p._x, p._y)
+{
+	_vArr = new Vertex[p._count];
+	for(int i = 0;i<p._count;i++)
+	{
+		_vArr[i] = Vertex(p._vArr[i]);
+	}
+	
+	_count = p._count;
+}
+
 Polygon::~Polygon()
 {	
 	delete [] _vArr;
@@ -30,3 +41,22 @@ double Polygon::area()
 	
 	return area;
 }
+
+void Polygon::print()
+{
+	std::cout << "POLYGON: ";
+	Shape::print();
+	for(int i = 0;i<_count;i++)
+	{
+		std::cout << "(" << _vArr[i].X() << "," << _vArr[i].Y() << ") ";
+	}
+	std::cout << "\n";
+	
+}
+
+Polygon *Polygon::clone()
+{
+	Polygon *tmp = new Polygon(*this);
+	return tmp;
+}
+
