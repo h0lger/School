@@ -10,7 +10,7 @@ public:
 	~Polygon();
 	double area(); //override
 	void print(); //override
-	Polygon *clone(); //override
+	Polygon *clone() const; //override
 private:
 	Vertex *_vArr;
 	int _count;

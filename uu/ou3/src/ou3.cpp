@@ -3,6 +3,7 @@
 #include "point.h"
 #include "circle.h"
 #include "rectangle.h"
+#include "shapelist.h"
 using namespace std;
 
 int main()
@@ -32,6 +33,23 @@ int main()
 	c2->print();
 	Polygon *p2 = pl.clone();
 	p2->print();
+	
+	cout << "TEST AV LISTA:\n";
+	ShapeList lista = ShapeList();
+	Shape *cPtr = &c;
+	Shape *pPtr = &p;
+	Shape *rPtr = &r;
+	Shape *plPtr = &pl;
+	lista.add(*cPtr);
+	lista.add(*pPtr);
+	lista.add(*rPtr);
+	lista.add(*plPtr);	
+	lista.print();
+	cout << "TOT AREA: " << lista.area() << "\n";
+	cout << "NU TAR VI BORT\n";
+	lista.remove(Vertex(11, 50));
+	lista.print();
+	
 	
 	return 0;
 }

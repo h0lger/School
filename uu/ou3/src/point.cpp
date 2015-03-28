@@ -23,7 +23,7 @@ void Point::print()
 	std::cout << _size << "\n";
 }
 
-Point *Point::clone()
+Point *Point::clone() const
 {
 	Point *tmp = new Point(*this);
 	return tmp;

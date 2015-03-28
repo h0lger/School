@@ -9,7 +9,7 @@ public:
 	//~Point();
 	double area(); //override
 	void print(); //override
-	Point *clone(); //override
+	Point *clone() const; //override
 	
 private:
 	double _size;

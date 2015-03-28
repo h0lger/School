@@ -4,7 +4,13 @@
 class Node
 {
 public:
-	Shape *CurrNode; //aktuell
+	//konstruktorer
+	Node();
+	Node(const Node &); //kopieringskonstruktor
+	Node(Shape *, Node *);
+	~Node();
+	
+	Shape *Curr; //aktuell
 	Node *NextNode;	//nästa
 };
 

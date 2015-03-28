@@ -12,14 +12,38 @@ Shape::Shape(const Shape &s)
 	_y = s._y;
 }
 
+Shape::~Shape()
+{
+	std::cout << "~Shape()";
+	_x = 0;
+	_y = 0;
+}
+
 //Positionen
 void Shape::print()
 {
 	std::cout << "(" << _x << "," << _y << ") ";
 }
 
-Shape* Shape::clone()
+double Shape::area()
+{
+	std::cout << "Ska inte användas";
+	return 0;
+}
+
+
+Shape* Shape::clone() const
 {
 	Shape* tmp = new Shape(*this);
 	return tmp;
+}
+
+double Shape::getX()
+{
+	return _x;
+}
+
+double Shape::getY()
+{
+	return _y;
 }

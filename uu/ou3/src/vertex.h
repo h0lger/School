@@ -12,8 +12,8 @@ public:
 
 	//metoder
 	const Vertex& operator=(const Vertex& v);
-	int X();
-	int Y();
+	int X() const;
+	int Y() const;
 	
 	friend std::ostream& operator<<(std::ostream&, const Vertex&);
 

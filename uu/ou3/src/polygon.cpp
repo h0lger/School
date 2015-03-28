@@ -54,7 +54,7 @@ void Polygon::print()
 	
 }
 
-Polygon *Polygon::clone()
+Polygon *Polygon::clone() const
 {
 	Polygon *tmp = new Polygon(*this);
 	return tmp;

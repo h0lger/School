@@ -9,7 +9,7 @@ public:
 	//~Circle();
 	double area(); //override
 	void print(); //override
-	Circle *clone(); //override
+	Circle *clone() const; //override
 	
 private:
 	double _r;

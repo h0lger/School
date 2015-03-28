@@ -24,7 +24,7 @@ void Circle::print()
 	std::cout << _r << "\n";
 }
 
-Circle * Circle::clone()
+Circle * Circle::clone() const
 {
 	Circle *tmp = new Circle(*this);
 	return tmp;

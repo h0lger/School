@@ -16,8 +16,8 @@ Vertex::Vertex(int x, int y)
 }
 
 //metoder
-int Vertex::X() { return _x; }
-int Vertex::Y() { return _y; }
+int Vertex::X() const { return _x; }
+int Vertex::Y() const { return _y; }
 
 const Vertex& Vertex::operator =(const Vertex& v)
 {	

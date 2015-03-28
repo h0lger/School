@@ -7,10 +7,13 @@ public:
 	//Shape();
 	Shape(double x, double y);
 	Shape(const Shape &); //kopieringskonstruktor
-	//~Shape();
-	virtual Shape *clone(); //klonar ett objekt
-	double area();
-	void print(); //skriver ut figuren (typ, position, storlek)
+	virtual ~Shape();
+	virtual Shape *clone() const; //klonar ett objekt
+	virtual double area();
+	virtual void print(); //skriver ut figuren (typ, position, storlek)
+	double getX();
+	double getY();
+	
 protected:
 	double _x, _y;
 };

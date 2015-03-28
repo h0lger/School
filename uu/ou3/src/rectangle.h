@@ -9,7 +9,7 @@ public:
 	//~Rectangle();
 	double area(); //override
 	void print(); //override
-	Rectangle *clone(); //override
+	Rectangle *clone() const; //override
 	
 private:
 	double _width, _height;

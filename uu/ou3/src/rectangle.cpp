@@ -25,7 +25,7 @@ void Rectangle::print()
 	std::cout << "(" << _width << "," << _height << ")\n";
 }
 
-Rectangle *Rectangle::clone()
+Rectangle *Rectangle::clone() const
 {
 	Rectangle *tmp = new Rectangle(*this);
 	return tmp;
