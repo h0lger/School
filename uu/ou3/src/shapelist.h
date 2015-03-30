@@ -18,5 +18,6 @@ public:
 	
 private:
 	Node *_node; //håller samman den länkade listan
+	bool candidateRemove(Node *, const Vertex &);	
 };
 #endif

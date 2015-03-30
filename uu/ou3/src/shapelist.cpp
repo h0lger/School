@@ -12,7 +12,8 @@ ShapeList::ShapeList(const ShapeList &s)
 
 ShapeList::~ShapeList()
 {
-	std::cout << "TODO destruktor\n";
+	std::cout << "Destruktor Shapelist\n";
+	delete _node;
 }
 
 void ShapeList::add(const Shape &s)
@@ -50,22 +51,35 @@ double ShapeList::area()
 
 void ShapeList::remove(const Vertex &v)
 {
-	Node *tmp = _node;
-	while(tmp != NULL)
+	Node *prev = NULL;
+	Node *current = _node;
+	Node *next = current->NextNode;	
+	
+	while(current != NULL)
 	{
-		if((tmp->NextNode != NULL) &&
-		(std::abs(tmp->NextNode->Curr->getX() - v.X()) <= 1 ||
-		std::abs(tmp->NextNode->Curr->getY() - v.Y()) <= 1))
+		if(candidateRemove(current, v))
 		{
-			if(tmp->NextNode->NextNode != NULL)
-			{
-				tmp->NextNode = new Node(*tmp->NextNode->NextNode);
-				//delete tmp->Curr;
-			}
+			if(prev != NULL)
+				prev->NextNode = next;
 			else
-				tmp->NextNode = NULL;			
+				_node = next;			
 		}
 		else
-			tmp = tmp->NextNode;
-	}
+			prev = current;
+		
+		current = next;
+		if(current != NULL)
+			next = current->NextNode;
+	}	
+}
+
+bool ShapeList::candidateRemove(Node *n, const Vertex &v)
+{
+	if(n != NULL && (std::abs(n->Curr->getX() - v.X()) <= 1 ||
+		std::abs(n->Curr->getY() - v.Y()) <= 1))
+		{
+			return true; //ska tas bort
+		}
+		else
+			return false;
 }

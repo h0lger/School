@@ -47,7 +47,7 @@ int main()
 	lista.print();
 	cout << "TOT AREA: " << lista.area() << "\n";
 	cout << "NU TAR VI BORT\n";
-	lista.remove(Vertex(11, 50));
+	lista.remove(Vertex(10, 10));
 	lista.print();
 	
 	

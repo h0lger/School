@@ -8,7 +8,7 @@ Node::Node()
 Node::Node(const Node &n)
 {
 	Curr = n.Curr;
-	NextNode = n.NextNode;
+	NextNode = new Node(*n.NextNode);
 }
 
 Node::Node(Shape *s, Node *n)
