@@ -7,7 +7,7 @@ public:
 	//konstruktorer
 	Node();
 	Node(const Node &); //kopieringskonstruktor
-	Node(Shape *, Node *);
+	Node(Shape &, Node *);
 	~Node();
 	
 	Shape *Curr; //aktuell

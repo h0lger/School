@@ -14,7 +14,7 @@ Shape::Shape(const Shape &s)
 
 Shape::~Shape()
 {
-	std::cout << "~Shape()";
+	std::cout << "~Shape()\n";
 	_x = 0;
 	_y = 0;
 }
@@ -27,7 +27,7 @@ void Shape::print()
 
 double Shape::area()
 {
-	std::cout << "Ska inte användas";
+	std::cout << "Ska inte användas\n";
 	return 0;
 }
 

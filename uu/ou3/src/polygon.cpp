@@ -18,11 +18,13 @@ Polygon::Polygon(const Polygon &p) : Shape(p._x, p._y)
 	_count = p._count;
 }
 
+/*
 Polygon::~Polygon()
 {	
+	std::cout << "Destruktor Polygon";
 	delete [] _vArr;
 };
-
+*/
 double Polygon::area()
 {
 	double area = 0, sista = 0;	
@@ -56,7 +58,6 @@ void Polygon::print()
 
 Polygon *Polygon::clone() const
 {
-	Polygon *tmp = new Polygon(*this);
-	return tmp;
+	return new Polygon(*this);	
 }
 

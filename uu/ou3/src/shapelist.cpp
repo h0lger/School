@@ -7,7 +7,7 @@ ShapeList::ShapeList()
 
 ShapeList::ShapeList(const ShapeList &s)
 {
-	_node = new Node(*_node); //skapar en kopia	
+	_node = new Node(*s._node); //skapar en kopia	av hela kedjan	
 }
 
 ShapeList::~ShapeList()
@@ -18,10 +18,7 @@ ShapeList::~ShapeList()
 
 void ShapeList::add(const Shape &s)
 {
-	Shape *tmp = s.clone(); //skapa en kopia
-	
-	_node = new Node(tmp, _node);
-	
+	_node = new Node(*s.clone(), _node);	
 }
 
 void ShapeList::print()
@@ -62,7 +59,10 @@ void ShapeList::remove(const Vertex &v)
 			if(prev != NULL)
 				prev->NextNode = next;
 			else
+			{
 				_node = next;			
+				prev = _node;
+			}
 		}
 		else
 			prev = current;
@@ -75,8 +75,8 @@ void ShapeList::remove(const Vertex &v)
 
 bool ShapeList::candidateRemove(Node *n, const Vertex &v)
 {
-	if(n != NULL && (std::abs(n->Curr->getX() - v.X()) <= 1 ||
-		std::abs(n->Curr->getY() - v.Y()) <= 1))
+	if(n != NULL && (std::abs(n->Curr->getX() - v.X()) < 1 ||
+		std::abs(n->Curr->getY() - v.Y()) < 1))
 		{
 			return true; //ska tas bort
 		}

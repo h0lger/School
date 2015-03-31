@@ -8,48 +8,26 @@ using namespace std;
 
 int main()
 {
-	Point p(10, 20, 50);
-	cout << p.area() << "\n";
-	p.print();
-	
-	Circle c(10, 10, 10);
-	cout << c.area() << "\n";
-	c.print();
-	
-	Rectangle r(1, 1, 10, 10);
-	cout << r.area() << "\n";
-	r.print();
-	
-	Vertex vArr[] = { Vertex(0, 0), Vertex(10, 0), 
-										Vertex(5, 2), Vertex(5, 5)};
-										
-	Polygon pl(1, 1, vArr, 4);
-	cout << pl.area() << "\n";
-	pl.print();
-	
-	//test av klon
-	cout << "TEST AV KLON:\n";
-	Circle *c2 = c.clone();
-	c2->print();
-	Polygon *p2 = pl.clone();
-	p2->print();
-	
-	cout << "TEST AV LISTA:\n";
-	ShapeList lista = ShapeList();
-	Shape *cPtr = &c;
-	Shape *pPtr = &p;
-	Shape *rPtr = &r;
-	Shape *plPtr = &pl;
-	lista.add(*cPtr);
-	lista.add(*pPtr);
-	lista.add(*rPtr);
-	lista.add(*plPtr);	
-	lista.print();
-	cout << "TOT AREA: " << lista.area() << "\n";
-	cout << "NU TAR VI BORT\n";
-	lista.remove(Vertex(10, 10));
-	lista.print();
-	
-	
-	return 0;
+	ShapeList list;
+  Vertex varr[] = { Vertex(0,0), Vertex(10,0),
+                    Vertex(5,2), Vertex(5,5) };
+  list.add( Polygon( 1, 4, varr, 4 ) );
+  list.add( Rectangle( 4, 10, 2, 4) );
+  list.add( Circle( 5,5, 3)  );
+  list.add( Point( 6, 7, 1 ) );
+
+  list.print();
+  cout << " Totalyta: " << list.area() << endl;
+
+  ShapeList list2(list);
+  list2.print();
+  cout << " Totalyta: " << list2.area() << endl;
+  list.remove( Vertex(5,5) );
+  list.print();
+  cout << " Totalyta: " << list.area() << endl;
+  list2.print();
+  cout << " Totalyta: " << list2.area() << endl;
+  
+
+  return 0;
 }

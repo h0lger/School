@@ -10,7 +10,7 @@ Rectangle::Rectangle(double x, double y, double width, double heigth) : Shape(x,
 Rectangle::Rectangle(const Rectangle &r) : Shape(r._x, r._y)
 {
 	_width = r._width;
-	_height = r._width;
+	_height = r._height;
 }
 
 double Rectangle::area()

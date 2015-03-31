@@ -7,7 +7,7 @@ class Polygon : public Shape
 public:
 	Polygon(double x, double y, Vertex *vArr, int num);
 	Polygon(const Polygon &); //kopieringskonstruktor
-	~Polygon();
+	//~Polygon();
 	double area(); //override
 	void print(); //override
 	Polygon *clone() const; //override
