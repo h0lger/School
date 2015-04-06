@@ -11,8 +11,7 @@ ShapeList::ShapeList(const ShapeList &s)
 }
 
 ShapeList::~ShapeList()
-{
-	std::cout << "Destruktor Shapelist\n";
+{	
 	delete _node;
 }
 
@@ -29,7 +28,7 @@ void ShapeList::print()
 		tmp->Curr->print();
 		tmp = tmp->NextNode;
 	}
-	std::cout << "\n";
+	std::cout << "\n";	
 	
 }
 
@@ -42,6 +41,7 @@ double ShapeList::area()
 		area += tmp->Curr->area();
 		tmp = tmp->NextNode;
 	}
+	
 	
 	return area;
 }
@@ -62,7 +62,7 @@ void ShapeList::remove(const Vertex &v)
 			{
 				_node = next;			
 				prev = _node;
-			}
+			}			
 		}
 		else
 			prev = current;
@@ -70,7 +70,8 @@ void ShapeList::remove(const Vertex &v)
 		current = next;
 		if(current != NULL)
 			next = current->NextNode;
-	}	
+	}
+	
 }
 
 bool ShapeList::candidateRemove(Node *n, const Vertex &v)

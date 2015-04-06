@@ -3,7 +3,11 @@
 //Konstruktor
 Polygon::Polygon(double x, double y, Vertex *v, int num) : Shape(x, y)
 {
-	_vArr = v;
+	_vArr = new Vertex[num];
+	for(int i = 0;i<num;i++)
+	{
+		_vArr[i] = Vertex(v[i]);
+	}	
 	_count = num;
 }
 
@@ -18,13 +22,12 @@ Polygon::Polygon(const Polygon &p) : Shape(p._x, p._y)
 	_count = p._count;
 }
 
-/*
+
 Polygon::~Polygon()
-{	
-	std::cout << "Destruktor Polygon";
+{		
 	delete [] _vArr;
 };
-*/
+
 double Polygon::area()
 {
 	double area = 0, sista = 0;	
@@ -60,4 +63,3 @@ Polygon *Polygon::clone() const
 {
 	return new Polygon(*this);	
 }
-

@@ -26,8 +26,7 @@ int main()
   list.print();
   cout << " Totalyta: " << list.area() << endl;
   list2.print();
-  cout << " Totalyta: " << list2.area() << endl;
-  
+  cout << " Totalyta: " << list2.area() << endl;  
 
   return 0;
 }

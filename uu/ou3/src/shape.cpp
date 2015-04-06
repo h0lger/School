@@ -13,8 +13,7 @@ Shape::Shape(const Shape &s)
 }
 
 Shape::~Shape()
-{
-	std::cout << "~Shape()\n";
+{	
 	_x = 0;
 	_y = 0;
 }
@@ -34,8 +33,7 @@ double Shape::area()
 
 Shape* Shape::clone() const
 {
-	Shape* tmp = new Shape(*this);
-	return tmp;
+	return new Shape(*this);	
 }
 
 double Shape::getX()
