@@ -57,12 +57,14 @@ void ShapeList::remove(const Vertex &v)
 		if(candidateRemove(current, v))
 		{
 			if(prev != NULL)
-				prev->NextNode = next;
+                prev->NextNode = new Node(*next);
 			else
 			{
-				_node = next;			
+                _node = next;
 				prev = _node;
-			}			
+			}
+            next = prev->NextNode->NextNode;
+            delete current;
 		}
 		else
 			prev = current;
@@ -70,8 +72,7 @@ void ShapeList::remove(const Vertex &v)
 		current = next;
 		if(current != NULL)
 			next = current->NextNode;
-	}
-	
+	}	
 }
 
 bool ShapeList::candidateRemove(Node *n, const Vertex &v)
