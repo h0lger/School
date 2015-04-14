@@ -5,11 +5,22 @@
 #include "fiction.h"
 #include "noneFiction.h"
 #include "helper.h"
+#include "regHandler.h"
 #include <iostream>
 
 int main()
 {
-	std::cout << "Hello\n";
+    const string _FILE = "src/reg.dat";
+    try
+    {
+        std::cout << "Hello\n";
+        RegHandler r(_FILE);
+        r.ReadRegFromFile();
+    }
+    catch(exception)
+    {
+        return 1;
+    }
 	
 
 	return 0;
