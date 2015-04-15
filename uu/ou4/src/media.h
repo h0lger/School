@@ -5,6 +5,9 @@ using namespace std;
 class Media
 {
 protected:
+    Media();
+    Media(int id, int borrower, string title);
+
 	int Id; //internt nummer
 	int Borrower; //låntagarnummer (om 0 är den tillgänglig för utlåning)
 	string Title;

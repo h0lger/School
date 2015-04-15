@@ -4,6 +4,8 @@
 class NoneFiction : public Book
 {
 public:
-	void Print();
+    NoneFiction(int id, int borrower, string title, string author);
+    void Print();
+    static string _NONEFICTION;
 };
 #endif

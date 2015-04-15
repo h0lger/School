@@ -11,23 +11,19 @@ vector<Media> * RegHandler::ReadRegFromFile()
     ifstream file(_filename.c_str());
     if(file)
     {
-        string line;
-        short i = 0;
-        while(!file.eof())
+        string *s = new string[ROWS];
+        int i = 0;
+        while(getline(file, s[i]))
         {
-            file >> line;
-            cout << line  << "\n";
+            if(i > 0 && i % (ROWS - 1) == 0)
+            {
+                CreateMedia((s));
+                i = 0;
+            }
+            else
+                i++;
         }
-//        char *c = new char[LINE_LENGTH];
-//        while(file.getline(c, LINE_LENGTH))
-//        {
-//            for(short i = 0; i<LINE_LENGTH;i++)
-//            {
-//                cout << c[i];
-//            }
-//            cout << "\n";
-//        }
-//        delete [] c;
+        delete [] s;
     }
     else
     {
@@ -37,4 +33,37 @@ vector<Media> * RegHandler::ReadRegFromFile()
 
 
     return lista;
+}
+
+Media *RegHandler::CreateMedia(string *sArr)
+{
+    Media *m;
+
+    if(sArr[FileRowEnum::Type] == Fiction::_FICTION)
+    {
+        cout << "Skapar en fiction\n";
+
+//        m = new Fiction(sArr[FileRowEnum::Id],
+//                (int)sArr[FileRowEnum::Borrower],
+//                sArr[FileRowEnum::Title,
+//                sArr[FileRowEnum::Creator]]);
+
+    }
+    else if(sArr[FileRowEnum::Type] == NoneFiction::_NONEFICTION)
+    {
+        cout << "Skapar en none fiction";
+    }
+    else if(sArr[FileRowEnum::Type] == Journal::_JOURNAL)
+    {
+        cout << "Skapar en journal";
+    }
+    else if(sArr[FileRowEnum::Type] == CD::_CD)
+    {
+        cout << "Skapar en CD";
+    }
+
+
+
+
+    return m;
 }
