@@ -6,9 +6,9 @@ using namespace std;
 class CD : public Media
 {
 public:
-    CD(int id, int borrower, string title, string artist, int length);
+    CD(int id, int borrower, string title, string artist, string length);
 	string Artist;
-	int Length; //i antal sekunder
+    string Length;
 
     static string _CD;
 };

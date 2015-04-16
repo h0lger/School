@@ -11,13 +11,19 @@ vector<Media> * RegHandler::ReadRegFromFile()
     ifstream file(_filename.c_str());
     if(file)
     {
-        string *s = new string[ROWS];
+        string *s = new string[BIG_ROWS];
         int i = 0;
         while(getline(file, s[i]))
         {
-            if(i > 0 && i % (ROWS - 1) == 0)
+            //läs in media när vi itererat för normala objekt
+            if(i > 0 && i % (NOR_ROWS - 1) == 0 && s[0] != CD::_CD)
             {
-                CreateMedia((s));
+                CreateMedia(s, lista);
+                i = 0;
+            }
+            else if(i > 0 && i % (BIG_ROWS - 1) == 0 && s[0] == CD::_CD)
+            {
+                CreateMedia(s, lista);
                 i = 0;
             }
             else
@@ -35,31 +41,56 @@ vector<Media> * RegHandler::ReadRegFromFile()
     return lista;
 }
 
-Media *RegHandler::CreateMedia(string *sArr)
+Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
 {
     Media *m;
 
-    if(sArr[FileRowEnum::Type] == Fiction::_FICTION)
+    if(sArr[RowPos::Type] == Fiction::_FICTION)
     {
-        cout << "Skapar en fiction\n";
+        string title = sArr[RowPos::NorRow_Title];
+        int id = stoi(sArr[RowPos::NorRow_Id]);
+        int b = stoi(sArr[RowPos::NorRow_Borrower]);
+        string author = sArr[RowPos::NorRow_Creator];
 
-//        m = new Fiction(sArr[FileRowEnum::Id],
-//                (int)sArr[FileRowEnum::Borrower],
-//                sArr[FileRowEnum::Title,
-//                sArr[FileRowEnum::Creator]]);
+        m = new Fiction(id, b, title, author);
+        v->push_back(*m);
 
     }
-    else if(sArr[FileRowEnum::Type] == NoneFiction::_NONEFICTION)
+    else if(sArr[RowPos::Type] == NoneFiction::_NONEFICTION)
     {
-        cout << "Skapar en none fiction";
+        string title = sArr[RowPos::NorRow_Title];
+        int id = stoi(sArr[RowPos::NorRow_Id]);
+        int b = stoi(sArr[RowPos::NorRow_Borrower]);
+        string author = sArr[RowPos::NorRow_Creator];
+
+        m = new NoneFiction(id, b, title, author);
+        v->push_back(*m);
     }
-    else if(sArr[FileRowEnum::Type] == Journal::_JOURNAL)
+    else if(sArr[RowPos::Type] == Journal::_JOURNAL)
     {
-        cout << "Skapar en journal";
+        string title = sArr[RowPos::NorRow_Title];
+        int id = stoi(sArr[RowPos::NorRow_Id]);
+        int b = stoi(sArr[RowPos::NorRow_Borrower]);
+        string pub = sArr[RowPos::NorRow_Creator];
+
+        m = new Journal(id, b, title, pub);
+        v->push_back(*m);
     }
-    else if(sArr[FileRowEnum::Type] == CD::_CD)
+    else if(sArr[RowPos::Type] == CD::_CD)
     {
-        cout << "Skapar en CD";
+        string artist = sArr[RowPos::BigRow_Creator];
+        string title = sArr[RowPos::BigRow_Title];
+        string l = sArr[RowPos::BigRow_Length];
+        int id = stoi(sArr[RowPos::BigRow_Id]);
+        int b = stoi(sArr[RowPos::BigRow_Borrower]);
+
+        m = new CD(id, b, title, artist, l);
+        v->push_back(*m);
+    }
+    else
+    {
+        cerr << "Typen kan inte kännas igen från filen\n";
+        throw exception();
     }
 
 

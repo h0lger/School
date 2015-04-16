@@ -1,6 +1,6 @@
 #include "noneFiction.h"
 
-string NoneFiction::_NONEFICTION = "NoneFiction";
+string NoneFiction::_NONEFICTION = "NonFiction";
 
 NoneFiction::NoneFiction(int id, int borrower, string title, string author)
 {
