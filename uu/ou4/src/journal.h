@@ -8,5 +8,7 @@ public:
 
     string Published;
     static string _JOURNAL;
+
+    void Print(ostream &os); //override
 };
 #endif

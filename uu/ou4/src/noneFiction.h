@@ -7,5 +7,6 @@ public:
     NoneFiction(int id, int borrower, string title, string author);
     void Print();
     static string _NONEFICTION;
+    void Print(ostream &os);
 };
 #endif

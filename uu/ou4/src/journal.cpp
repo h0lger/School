@@ -6,3 +6,12 @@ Journal::Journal(int id, int borrower, string title, string pub): Media(id, borr
 {
 
 }
+
+void Journal::Print(ostream &os)
+{
+    os << _JOURNAL << endl <<
+          Published << endl <<
+          Title << endl <<
+          Id << endl <<
+          Borrower << endl;
+}

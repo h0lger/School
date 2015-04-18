@@ -9,5 +9,7 @@ public:
     void Print();
 
     static string _FICTION;
+    void Print(ostream &os);
+
 };
 #endif

@@ -10,7 +10,12 @@ NoneFiction::NoneFiction(int id, int borrower, string title, string author)
     Author = author;
 }
 
-void NoneFiction::Print()
+void NoneFiction::Print(ostream &os)
 {
+    os << _NONEFICTION << endl <<
+          Author << endl <<
+          Title << endl <<
+          Id << endl <<
+          Borrower << endl;
 
 }

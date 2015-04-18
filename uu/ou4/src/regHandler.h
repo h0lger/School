@@ -11,16 +11,16 @@
 #include "journal.h"
 using namespace std;
 #define NOR_ROWS 5 //hur många rader ett "normalt" objekt utnyttjar i filen
-#define BIG_ROWS 6 // hur många rader ett "större" objekt  utnyttjar i filen (cd)
+#define BIG_ROWS 6 // hur många rader ett "större" objekt  utnyttjar i filen (t.ex. cd)
 
 class RegHandler
 {    
 public:
     RegHandler(const string filename);
-    vector<Media> *ReadRegFromFile(); //läser upp registret i minnet
-    bool SaveToFile(vector<Media> *v); //sparar minnet till registret
+    vector<Media*> *ReadRegFromFile(); //läser upp registret i minnet
+    bool SaveToFile(vector<Media*> *v); //sparar minnet till registret
 
-    //radpositioner för normala objekt
+    //radpositioner i filen
     enum RowPos: short
     {
         Type = 0, //typ t.ex. Fiction, CD (alltid på samma pos!)
@@ -39,6 +39,6 @@ public:
 private:
     const string _filename;
 
-    Media *CreateMedia(string *sArr, vector<Media> *v);
+    void CreateAddMedia(string *sArr, vector<Media*> *v);
 };
 #endif

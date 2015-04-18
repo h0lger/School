@@ -11,5 +11,7 @@ public:
     string Length;
 
     static string _CD;
+
+    void Print(ostream &os); //override
 };
 #endif

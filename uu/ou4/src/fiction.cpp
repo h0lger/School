@@ -10,8 +10,12 @@ Fiction::Fiction(int id, int borrower, string title, string author)
     Author = author;
 }
 
-void Fiction::Print()
+void Fiction::Print(ostream &os)
 {
-
+    os << _FICTION << endl <<
+          Author << endl <<
+          Title << endl <<
+          Id << endl <<
+          Borrower << endl;
 
 }

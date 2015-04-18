@@ -1,6 +1,7 @@
 #ifndef MEDIA_H
 #define MEDIA_H
 #include <string>
+#include <iostream>
 using namespace std;
 class Media
 {
@@ -10,6 +11,9 @@ protected:
 
 	int Id; //internt nummer
 	int Borrower; //låntagarnummer (om 0 är den tillgänglig för utlåning)
-	string Title;
+    string Title;
+
+public:
+    virtual void Print(ostream &os);
 };
 #endif

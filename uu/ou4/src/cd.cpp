@@ -6,3 +6,13 @@ CD::CD(int id, int borrower, string title, string artist, string length): Media(
 {
 
 }
+
+void CD::Print(ostream &os)
+{
+    os << _CD << endl <<
+          Artist << endl <<
+          Title << endl <<
+          Length << endl <<
+          Id << endl <<
+          Borrower << endl;
+}

@@ -5,9 +5,9 @@ RegHandler::RegHandler(const string filename) : _filename(filename)
 
 }
 
-vector<Media> * RegHandler::ReadRegFromFile()
+vector<Media*> * RegHandler::ReadRegFromFile()
 {
-    vector<Media> *lista = new vector<Media>();
+    vector<Media*> *lista = new vector<Media*>();
     ifstream file(_filename.c_str());
     if(file)
     {
@@ -18,12 +18,12 @@ vector<Media> * RegHandler::ReadRegFromFile()
             //läs in media när vi itererat för normala objekt
             if(i > 0 && i % (NOR_ROWS - 1) == 0 && s[0] != CD::_CD)
             {
-                CreateMedia(s, lista);
+                CreateAddMedia(s, lista);
                 i = 0;
             }
             else if(i > 0 && i % (BIG_ROWS - 1) == 0 && s[0] == CD::_CD)
             {
-                CreateMedia(s, lista);
+                CreateAddMedia(s, lista);
                 i = 0;
             }
             else
@@ -33,7 +33,7 @@ vector<Media> * RegHandler::ReadRegFromFile()
     }
     else
     {
-        cerr << "Registerfilen kunde inte öppnas\n";
+        cerr << "Registerfilen kunde inte öppnas för läsning\n";
         throw exception();
     }
 
@@ -41,10 +41,26 @@ vector<Media> * RegHandler::ReadRegFromFile()
     return lista;
 }
 
-Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
+bool RegHandler::SaveToFile(vector<Media*> *v)
 {
-    Media *m;
+    ofstream file(("test_" + _filename).c_str());
+    if(file)
+    {
+        for(vector<Media*>::iterator it = v->begin();it != v->end();it++)
+        {
+            Media *m = *it;
+            m->Print(file);
+        }
+    }
+    else
+    {
+        cerr << "Registerfilen kunde inte öppnas för skrivning\n";
+        return false;
+    }
+}
 
+void RegHandler::CreateAddMedia(string *sArr, vector<Media*> *v)
+{
     if(sArr[RowPos::Type] == Fiction::_FICTION)
     {
         string title = sArr[RowPos::NorRow_Title];
@@ -52,8 +68,8 @@ Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
         int b = stoi(sArr[RowPos::NorRow_Borrower]);
         string author = sArr[RowPos::NorRow_Creator];
 
-        m = new Fiction(id, b, title, author);
-        v->push_back(*m);
+        Fiction *f = new Fiction(id, b, title, author);
+        v->push_back(f);
 
     }
     else if(sArr[RowPos::Type] == NoneFiction::_NONEFICTION)
@@ -63,8 +79,8 @@ Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
         int b = stoi(sArr[RowPos::NorRow_Borrower]);
         string author = sArr[RowPos::NorRow_Creator];
 
-        m = new NoneFiction(id, b, title, author);
-        v->push_back(*m);
+        NoneFiction *nf = new NoneFiction(id, b, title, author);
+        v->push_back(nf);
     }
     else if(sArr[RowPos::Type] == Journal::_JOURNAL)
     {
@@ -73,8 +89,8 @@ Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
         int b = stoi(sArr[RowPos::NorRow_Borrower]);
         string pub = sArr[RowPos::NorRow_Creator];
 
-        m = new Journal(id, b, title, pub);
-        v->push_back(*m);
+        Journal *j = new Journal(id, b, title, pub);
+        v->push_back(j);
     }
     else if(sArr[RowPos::Type] == CD::_CD)
     {
@@ -84,8 +100,8 @@ Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
         int id = stoi(sArr[RowPos::BigRow_Id]);
         int b = stoi(sArr[RowPos::BigRow_Borrower]);
 
-        m = new CD(id, b, title, artist, l);
-        v->push_back(*m);
+        CD *cd = new CD(id, b, title, artist, l);
+        v->push_back(cd);
     }
     else
     {
@@ -93,8 +109,4 @@ Media *RegHandler::CreateMedia(string *sArr, vector<Media> *v)
         throw exception();
     }
 
-
-
-
-    return m;
 }

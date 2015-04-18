@@ -8,14 +8,19 @@
 #include "regHandler.h"
 #include <iostream>
 
+
 int main()
 {
-    const string _FILE = "src/reg.dat";
+    const string _FILE = "reg.dat";
+
     try
     {
         std::cout << "Hello\n";
+        vector<Media*> *v;
         RegHandler r(_FILE);
-        r.ReadRegFromFile();
+        v = r.ReadRegFromFile();
+        r.SaveToFile((v));
+
     }
     catch(exception)
     {
