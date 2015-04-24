@@ -13,6 +13,7 @@ using namespace std;
 #define NOR_ROWS 5 //hur många rader ett "normalt" objekt utnyttjar i filen
 #define BIG_ROWS 6 // hur många rader ett "större" objekt  utnyttjar i filen (t.ex. cd)
 
+//Hanterar registerfilen
 class RegHandler
 {    
 public:

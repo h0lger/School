@@ -57,6 +57,8 @@ bool RegHandler::SaveToFile(vector<Media*> *v)
         cerr << "Registerfilen kunde inte öppnas för skrivning\n";
         return false;
     }
+
+    return true;
 }
 
 void RegHandler::CreateAddMedia(string *sArr, vector<Media*> *v)

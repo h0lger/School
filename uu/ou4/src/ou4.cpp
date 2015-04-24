@@ -7,6 +7,7 @@
 #include "helper.h"
 #include "regHandler.h"
 #include <iostream>
+#include "library.h"
 
 
 int main()
@@ -14,11 +15,13 @@ int main()
     const string _FILE = "reg.dat";
 
     try
-    {
-        std::cout << "Hello\n";
+    {        
         vector<Media*> *v;
         RegHandler r(_FILE);
         v = r.ReadRegFromFile();
+        Library lib(v);
+        lib.ShowMenu();
+        //lib.Search("hej", Library::SearchMode::Author);
         r.SaveToFile((v));
 
     }
