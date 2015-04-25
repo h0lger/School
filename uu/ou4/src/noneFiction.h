@@ -8,5 +8,9 @@ public:
     void Print();
     static string _NONEFICTION;
     void Print(ostream &os);
+    bool IsSearchCandidate(string s, SearchMode sMode); //override
+
+private:
+    bool SearchAuthor(string s); //override
 };
 #endif

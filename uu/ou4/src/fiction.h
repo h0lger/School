@@ -10,6 +10,10 @@ public:
 
     static string _FICTION;
     void Print(ostream &os);
+    bool IsSearchCandidate(string s, SearchMode sMode); //override
+
+private:
+    bool SearchAuthor(string s); //override
 
 };
 #endif

@@ -11,5 +11,8 @@ public:
     //Book(int, int, string, string);
 	string Author;
     virtual void Print(ostream &) = 0;
+
+protected:
+    virtual bool SearchAuthor(string s) = 0;
 };
 #endif

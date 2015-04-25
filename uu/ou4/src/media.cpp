@@ -9,3 +9,16 @@ void Media::Print(ostream &os)
 {
     cerr << "Använd inte\n";
 }
+
+bool Media::IsSearchCandidate(string s, SearchMode sMode)
+{
+    cout << "Ska ej användas!\n";
+    return false;
+}
+
+bool Media::SearchTitle(string s)
+{
+    size_t found;
+    found = Title.find(s);
+    return found != Title.npos;
+}

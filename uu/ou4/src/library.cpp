@@ -5,14 +5,44 @@ Library::Library(vector<Media*> *v)
     _v = v;
 }
 
-void Library::Search(string s, SearchMode sMode)
+void Library::ShowSearch()
 {
+    SearchMode sMode;
+    char c;
+    for(bool ok = false;!ok;)
+    {
+        cout << "Search by title (T) or author/artist (A)? ";
+        cin >> c;
+        switch(c)
+        {
+            case 'T':
+                sMode = SearchMode::Title;
+                ok = true;
+                break;
+             case 'A':
+                sMode = SearchMode::Author;
+                ok = true;
+                break;
+        }
+    }
+
+    string s;
+    cout << "Search string: ";
+    cin >> s;
+    Search(s, sMode);
+}
+
+void Library::Search(string s, SearchMode sMode)
+{    
     for(vector<Media*>::iterator it = _v->begin();it != _v->end();it++)
     {
         Media *m = *it;
-        cout << _LINE;
-        m->Print(cout);
-        cout << _LINE << "\n";
+        if(m->IsSearchCandidate(s, sMode))
+        {
+            cout << _LINE;
+            m->Print(cout);
+            cout << _LINE << "\n";
+        }
     }
 }
 
@@ -24,7 +54,7 @@ void Library::ShowMenu()
     cout << "J - insert new Journal\n";
     cout << "X - remove an object from the library\n";
     cout << "H - show this text\n";
-    cout << "S - search";
+    cout << "S - search\n";
     cout << "B - borrow a object\n";
     cout << "R - return an object\n";
     cout << "Q - quit the program\n";

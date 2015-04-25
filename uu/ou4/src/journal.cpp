@@ -15,3 +15,17 @@ void Journal::Print(ostream &os)
           Id << endl <<
           Borrower << endl;
 }
+
+bool Journal::IsSearchCandidate(string s, SearchMode sMode)
+{
+    if(sMode == SearchMode::Title)
+        return SearchTitle(s);
+    else if(sMode == SearchMode::Author)
+        return false; //inte applicerbart
+    else
+    {
+        cerr << "Fel söktyp\n";
+        return false;
+    }
+
+}

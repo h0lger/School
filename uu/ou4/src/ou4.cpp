@@ -21,8 +21,9 @@ int main()
         v = r.ReadRegFromFile();
         Library lib(v);
         lib.ShowMenu();
-        //lib.Search("hej", Library::SearchMode::Author);
-        r.SaveToFile((v));
+        lib.ShowSearch();
+
+        //r.SaveToFile((v));
 
     }
     catch(exception)

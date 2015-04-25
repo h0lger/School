@@ -2,6 +2,7 @@
 #define MEDIA_H
 #include <string>
 #include <iostream>
+#include "utils.h"
 using namespace std;
 class Media
 {
@@ -12,8 +13,10 @@ protected:
 	int Id; //internt nummer
 	int Borrower; //låntagarnummer (om 0 är den tillgänglig för utlåning)
     string Title;
+    bool SearchTitle(string s);
 
 public:
     virtual void Print(ostream &os);
+    virtual bool IsSearchCandidate(string s, SearchMode sMode);
 };
 #endif

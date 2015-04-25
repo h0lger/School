@@ -13,5 +13,9 @@ public:
     static string _CD;
 
     void Print(ostream &os); //override
+    bool IsSearchCandidate(string s, SearchMode sMode); //override
+
+private:
+    bool SearchArtist(string s);
 };
 #endif

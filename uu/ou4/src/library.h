@@ -10,16 +10,12 @@ public:
 
     Library(vector<Media*> *v);
 
-    enum SearchMode: short
-    {
-        Title = 0,
-        Author = 1 //Author/Artist
-    };
 
-    void Search(string s, SearchMode sMode); //söker och skriver ut resultatet
+    void ShowSearch();
     void ShowMenu();
 
 private:
+    void Search(string s, SearchMode sMode); //söker och skriver ut resultatet
     vector<Media*> *_v;
     const string _LINE = "-----------------------------------\n";
 
