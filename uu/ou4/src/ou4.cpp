@@ -23,7 +23,9 @@ int main()
         lib.ShowMenu();
         //lib.ShowSearch();
         //lib.ShowBorrow();
-        lib.ShowReturn();
+        //lib.ShowReturn();
+        //lib.ShowInsert('C');
+        //lib.ShowRemove();
 
         //r.SaveToFile((v));
 
