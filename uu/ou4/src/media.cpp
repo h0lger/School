@@ -22,3 +22,23 @@ bool Media::SearchTitle(string s)
     found = Title.find(s);
     return found != Title.npos;
 }
+
+int Media::GetId() const
+{
+    return Id;
+}
+
+int Media::GetBorrower() const
+{
+    return Borrower;
+}
+
+void Media::BorrowMe(int borrower)
+{
+    Borrower = borrower;
+}
+
+void Media::ReturnMe()
+{
+    Borrower = 0;
+}

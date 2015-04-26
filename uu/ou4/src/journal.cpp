@@ -16,10 +16,17 @@ void Journal::Print(ostream &os)
           Borrower << endl;
 }
 
+bool Journal::SearchPublished(string s)
+{
+    size_t found;
+    found = Published.find(s);
+    return found != Published.npos;
+}
+
 bool Journal::IsSearchCandidate(string s, SearchMode sMode)
 {
     if(sMode == SearchMode::Title)
-        return SearchTitle(s);
+        return SearchPublished(s);
     else if(sMode == SearchMode::Author)
         return false; //inte applicerbart
     else

@@ -21,7 +21,9 @@ int main()
         v = r.ReadRegFromFile();
         Library lib(v);
         lib.ShowMenu();
-        lib.ShowSearch();
+        //lib.ShowSearch();
+        //lib.ShowBorrow();
+        lib.ShowReturn();
 
         //r.SaveToFile((v));
 

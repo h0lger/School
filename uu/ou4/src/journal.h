@@ -11,6 +11,7 @@ public:
 
     void Print(ostream &os); //override
     bool IsSearchCandidate(string s, SearchMode sMode); //override
+    bool SearchPublished(string s);
 
 };
 #endif

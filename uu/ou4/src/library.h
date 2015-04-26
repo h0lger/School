@@ -12,12 +12,20 @@ public:
 
 
     void ShowSearch();
+    void ShowBorrow();
+    void ShowReturn();
     void ShowMenu();
 
 private:
-    void Search(string s, SearchMode sMode); //söker och skriver ut resultatet
-    vector<Media*> *_v;
     const string _LINE = "-----------------------------------\n";
+    vector<Media*> *_v;
 
+    void Search(string s, SearchMode sMode); //söker och skriver ut resultatet
+    bool IdExists(int id); //kontrollerar om id finns
+    bool OkToBorrow(int id); //kontrollera om tillgänglig för utlåning
+    bool OkToReturn(int id, int borrower); //kontroller om ok att lämna tillbaka
+    bool Borrow(int id, int borrower);
+    bool UnBorrow(int id);
+    bool ReturnMedia(int id); //lämna tillbaka
 };
 #endif

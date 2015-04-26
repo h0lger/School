@@ -10,7 +10,7 @@ protected:
     Media();
     Media(int id, int borrower, string title);
 
-	int Id; //internt nummer
+    int Id; //internt nummer
 	int Borrower; //låntagarnummer (om 0 är den tillgänglig för utlåning)
     string Title;
     bool SearchTitle(string s);
@@ -18,5 +18,9 @@ protected:
 public:
     virtual void Print(ostream &os);
     virtual bool IsSearchCandidate(string s, SearchMode sMode);
+    int GetId() const;
+    int GetBorrower() const;
+    void BorrowMe(int borrower);
+    void ReturnMe();
 };
 #endif
