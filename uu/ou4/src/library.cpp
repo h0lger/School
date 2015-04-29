@@ -9,6 +9,11 @@ Library::Library(vector<Media*> *v)
     _v = v;
 }
 
+Library::~Library()
+{
+    //delete [] _v;
+}
+
 void Library::ShowMenu()
 {
     char c;
@@ -34,6 +39,7 @@ void Library::ShowMenu()
             case 'N':
             case 'J':
                 ShowInsert(c);
+                cout << "Mediat är tillagt\n";
             break;
 
             case 'X':
@@ -76,11 +82,12 @@ void Library::ShowInsert(char c)
         case 'C':
         {
             id = CreateId();
-            cout << "Title: ";
-            cin >> title;
-            cout << "Artist: ";
-            cin >> artist;
-            cout << "Length (hh:mm): ";
+            cout << "Titel: ";
+            cin.ignore();
+            getline(cin, title);
+            cout << "Artist: ";            
+            getline(cin, artist);
+            cout << "Längd (hh:mm): ";
             cin >> length;
             CD *cd = new CD(id, 0, title, artist, length);
             _v->push_back(cd);
@@ -91,10 +98,11 @@ void Library::ShowInsert(char c)
         case 'F':
         {
             id = CreateId();
-            cout << "Title: ";
-            cin >> title;
-            cout << "Author: ";
-            cin >> author;
+            cout << "Titel: ";
+            cin.ignore();
+            getline(cin, title);
+            cout << "Författare: ";
+            getline(cin, author);
             Fiction *f = new Fiction(id, 0, title, author);
             _v->push_back(f);
         }
@@ -104,10 +112,11 @@ void Library::ShowInsert(char c)
         case 'N':
         {
             id = CreateId();
-            cout << "Title: ";
-            cin >> title;
-            cout << "Author: ";
-            cin >> author;
+            cout << "Titel: ";
+            cin.ignore();
+            getline(cin, title);
+            cout << "Författare: ";
+            getline(cin, author);
             NoneFiction *f = new NoneFiction(id, 0, title, author);
             _v->push_back(f);
         }
@@ -117,9 +126,10 @@ void Library::ShowInsert(char c)
         case 'J':
         {
             id = CreateId();
-            cout << "Title: ";
-            cin >> title;
-            cout << "Published date: ";
+            cout << "Titel: ";
+            cin.ignore();
+            getline(cin, title);
+            cout << "Publicerad datum (dd/yy): ";
             cin >> published;
             Journal *j = new Journal(id, 0, published, title);
             _v->push_back(j);
@@ -134,7 +144,7 @@ void Library::ShowRemove()
     int pos = -1;
     for(bool ok = false;!ok;)
     {
-        cout << "Id to remove: ";
+        cout << "Id som ska tas bort: ";
         cin >> id;
         ok = IdExists(id, &pos) == true;
         if(!ok)
@@ -160,7 +170,7 @@ int Library::CreateId()
             cout << "Id finns redan\n";
     }
 
-    return true;
+    return id;
 }
 
 void Library::ShowSearch()
@@ -169,7 +179,7 @@ void Library::ShowSearch()
     char c;
     for(bool ok = false;!ok;)
     {
-        cout << "Search by title (T) or author/artist (A)? ";
+        cout << "Search på titel (T) eller författare/artist (A)? ";
         cin >> c;
         switch(c)
         {
@@ -185,7 +195,7 @@ void Library::ShowSearch()
     }
 
     string s;
-    cout << "Search string: ";
+    cout << "Söksträng: ";
     cin >> s;
     Search(s, sMode);
 }
@@ -225,7 +235,7 @@ void Library::ShowBorrow()
                 cout << "Det är redan utlånat\n";
         }
     }
-    cout << "Borrower: ";
+    cout << "Låntagare: ";
     //TODO: validera om numeriskt
     cin >> borrower;
     if(Borrow(id, borrower))
@@ -242,7 +252,7 @@ void Library::ShowReturn()
     //id
     for(bool ok = false;!ok;)
     {
-        cout << "ID: ";
+        cout << "Id: ";
         //TODO: validera om numeriskt
         cin >> id;
         ok = IdExists(id, &pos);

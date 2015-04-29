@@ -43,7 +43,7 @@ vector<Media*> * RegHandler::ReadRegFromFile()
 
 bool RegHandler::SaveToFile(vector<Media*> *v)
 {
-    ofstream file(("test_" + _filename).c_str());
+    ofstream file((_filename).c_str());
     if(file)
     {
         for(vector<Media*>::iterator it = v->begin();it != v->end();it++)
@@ -71,7 +71,7 @@ void RegHandler::CreateAddMedia(string *sArr, vector<Media*> *v)
         string author = sArr[RowPos::NorRow_Creator];
 
         Fiction *f = new Fiction(id, b, title, author);
-        v->push_back(f);
+        v->push_back(f);        
 
     }
     else if(sArr[RowPos::Type] == NoneFiction::_NONEFICTION)
@@ -82,7 +82,7 @@ void RegHandler::CreateAddMedia(string *sArr, vector<Media*> *v)
         string author = sArr[RowPos::NorRow_Creator];
 
         NoneFiction *nf = new NoneFiction(id, b, title, author);
-        v->push_back(nf);
+        v->push_back(nf);        
     }
     else if(sArr[RowPos::Type] == Journal::_JOURNAL)
     {
@@ -92,7 +92,7 @@ void RegHandler::CreateAddMedia(string *sArr, vector<Media*> *v)
         string pub = sArr[RowPos::NorRow_Creator];
 
         Journal *j = new Journal(id, b, title, pub);
-        v->push_back(j);
+        v->push_back(j);        
     }
     else if(sArr[RowPos::Type] == CD::_CD)
     {
@@ -103,7 +103,7 @@ void RegHandler::CreateAddMedia(string *sArr, vector<Media*> *v)
         int b = stoi(sArr[RowPos::BigRow_Borrower]);
 
         CD *cd = new CD(id, b, title, artist, l);
-        v->push_back(cd);
+        v->push_back(cd);        
     }
     else
     {

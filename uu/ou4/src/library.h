@@ -9,7 +9,7 @@ class Library
 public:
 
     Library(vector<Media*> *v);
-
+    ~Library();
 
     void ShowSearch();
     void ShowBorrow();

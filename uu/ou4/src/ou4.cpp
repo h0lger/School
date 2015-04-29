@@ -4,7 +4,6 @@
 #include "cd.h"
 #include "fiction.h"
 #include "noneFiction.h"
-#include "helper.h"
 #include "regHandler.h"
 #include <iostream>
 #include "library.h"
@@ -21,14 +20,10 @@ int main()
         v = r.ReadRegFromFile();
         Library lib(v);
         lib.ShowMenu();
-        //lib.ShowSearch();
-        //lib.ShowBorrow();
-        //lib.ShowReturn();
-        //lib.ShowInsert('C');
-        //lib.ShowRemove();
+        cout << "Spara registerfil\n";
+        r.SaveToFile(v);
 
-        //r.SaveToFile((v));
-
+        delete v;
     }
     catch(exception)
     {
