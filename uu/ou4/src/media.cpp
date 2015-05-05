@@ -5,6 +5,8 @@ Media::Media(int id, int borrower, string title): Id(id), Borrower(borrower), Ti
 
 }
 
+Media::~Media() {}
+
 void Media::Print(ostream &os)
 {
     cerr << "Använd inte\n";

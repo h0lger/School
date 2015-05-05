@@ -23,6 +23,13 @@ int main()
         cout << "Spara registerfil\n";
         r.SaveToFile(v);
 
+        while(!v->empty())
+        {
+            Media *m = v->back();
+            v->pop_back();
+            delete m;
+        }
+
         delete v;
     }
     catch(exception)

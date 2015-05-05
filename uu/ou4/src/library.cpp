@@ -11,7 +11,7 @@ Library::Library(vector<Media*> *v)
 
 Library::~Library()
 {
-    //delete [] _v;
+
 }
 
 void Library::ShowMenu()

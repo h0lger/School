@@ -7,7 +7,7 @@ using namespace std;
 class Book : public Media
 {
 public:
-    Book();
+    Book();    
     //Book(int, int, string, string);
 	string Author;
     virtual void Print(ostream &) = 0;
