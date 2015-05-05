@@ -1,0 +1,6 @@
+bin/
+prj/
+*.zip
+ou5*
+.gitignore~
+makefile~
