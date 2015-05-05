@@ -16,11 +16,11 @@ double Point::area()
 	return _size;
 }
 
-void Point::print()
+void Point::print(ostream& os)
 {
-	std::cout << "POINT: ";
-	Shape::print(); //använder basklassens print för att få ut pos
-	std::cout << _size << "\n";
+    os << "POINT: ";
+    Shape::print(os); //använder basklassens print för att få ut pos
+    //os << _size << "\n";
 }
 
 Point *Point::clone() const

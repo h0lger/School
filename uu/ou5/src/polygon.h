@@ -9,7 +9,7 @@ public:
 	Polygon(const Polygon &); //kopieringskonstruktor
 	~Polygon();
 	double area(); //override
-	void print(); //override
+    void print(ostream& os); //override
 	Polygon *clone() const; //override
 	
 private:

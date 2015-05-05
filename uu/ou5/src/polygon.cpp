@@ -47,15 +47,14 @@ double Polygon::area()
 	return area;
 }
 
-void Polygon::print()
-{
-	std::cout << "POLYGON: ";
-	Shape::print();
+void Polygon::print(ostream& os)
+{    
+    os << "POLYGON: ";
+    Shape::print(os);
 	for(int i = 0;i<_count;i++)
 	{
-		std::cout << "(" << _vArr[i].X() << "," << _vArr[i].Y() << ") ";
-	}
-	std::cout << "\n";
+        os << "(" << _vArr[i].X() << "," << _vArr[i].Y() << ") ";
+	}    
 	
 }
 

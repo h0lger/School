@@ -17,11 +17,11 @@ double Circle::area()
 	return M_PI * (_r * _r);
 }
 
-void Circle::print()
+void Circle::print(ostream& os)
 {
-	std::cout << "CIRCLE: ";
-	Shape::print();
-	std::cout << _r << "\n";
+    os << "CIRCLE: ";
+    Shape::print(os);
+    os << _r;
 }
 
 Circle * Circle::clone() const

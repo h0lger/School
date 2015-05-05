@@ -1,6 +1,7 @@
 #ifndef SHAPE_H
 #define SHAPE_H
 #include <iostream>
+using namespace std;
 class Shape
 {
 public:
@@ -10,7 +11,7 @@ public:
 	virtual ~Shape();
 	virtual Shape *clone() const; //klonar ett objekt
 	virtual double area();
-	virtual void print(); //skriver ut figuren (typ, position, storlek)
+    virtual void print(ostream& os); //skriver ut figuren (typ, position, storlek)
 	double getX();
 	double getY();
 	

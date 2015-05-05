@@ -19,9 +19,9 @@ Shape::~Shape()
 }
 
 //Positionen
-void Shape::print()
+void Shape::print(ostream& os)
 {
-	std::cout << "(" << _x << "," << _y << ") ";
+    os << _x << "," << _y << " ";
 }
 
 double Shape::area()

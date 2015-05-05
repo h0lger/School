@@ -8,7 +8,7 @@ public:
 	Point(const Point &); //kopieringskonstruktor
 	//~Point();
 	double area(); //override
-	void print(); //override
+    void print(ostream& os); //override
 	Point *clone() const; //override
 	
 private:

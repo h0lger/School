@@ -18,11 +18,11 @@ double Rectangle::area()
 	return _width * _height;
 }
 
-void Rectangle::print()
+void Rectangle::print(ostream& os)
 {
-	std::cout << "RECTANGLE: ";
-	Shape::print();
-	std::cout << "(" << _width << "," << _height << ")\n";
+    os << "RECTANGLE: ";
+    Shape::print(os);
+    os << "(" << _width << "," << _height << ")";
 }
 
 Rectangle *Rectangle::clone() const

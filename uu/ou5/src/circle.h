@@ -8,7 +8,7 @@ public:
 	Circle(const Circle &); //kopieringskonstruktor
 	//~Circle();
 	double area(); //override
-	void print(); //override
+    void print(ostream& os); //override
 	Circle *clone() const; //override
 	
 private:

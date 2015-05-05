@@ -32,7 +32,7 @@ const Vertex& Vertex::operator =(const Vertex& v)
 
 std::ostream& operator<<(std::ostream& os, const Vertex& ver)
 {
-	os << "(" << ver._x << "," << ver._y << ")";
+    os << "(" << ver._x << "," << ver._y << ")";
 	
 	return os;
 }

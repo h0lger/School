@@ -15,6 +15,7 @@ std::istream& operator >>(std::istream& is, ShapePtr& s)
 }
 
 std::ostream& operator <<(std::ostream& os, const ShapePtr& s)
-{
+{    
+    s._ptr->print(os);
     return os;
 }

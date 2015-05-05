@@ -8,7 +8,7 @@ public:
 	Rectangle(const Rectangle &); //kopieringskonstruktor
 	//~Rectangle();
 	double area(); //override
-	void print(); //override
+    void print(ostream& os); //override
 	Rectangle *clone() const; //override
 	
 private:
