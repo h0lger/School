@@ -18,9 +18,9 @@ double Point::area()
 
 void Point::print(ostream& os)
 {
-    os << "POINT: ";
+    os << POINT << " ";
     Shape::print(os); //använder basklassens print för att få ut pos
-    //os << _size << "\n";
+    os << _size;
 }
 
 Point *Point::clone() const

@@ -49,12 +49,16 @@ double Polygon::area()
 
 void Polygon::print(ostream& os)
 {    
-    os << "POLYGON: ";
+    os << POLYGON " ";
     Shape::print(os);
+    os << "<";
 	for(int i = 0;i<_count;i++)
 	{
-        os << "(" << _vArr[i].X() << "," << _vArr[i].Y() << ") ";
+        os << _vArr[i];
+        if(i < (_count - 1))
+            os << " ";
 	}    
+    os << ">";
 	
 }
 

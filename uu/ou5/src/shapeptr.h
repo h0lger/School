@@ -1,6 +1,10 @@
 #ifndef SHAPEPTR
 #define SHAPEPTR
 #include "shape.h"
+#include "polygon.h"
+#include "circle.h"
+#include "point.h"
+#include "rectangle.h"
 #include <iostream>
 
 class ShapePtr

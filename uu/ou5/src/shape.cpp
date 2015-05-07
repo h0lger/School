@@ -21,7 +21,7 @@ Shape::~Shape()
 //Positionen
 void Shape::print(ostream& os)
 {
-    os << _x << "," << _y << " ";
+    os << _x << " " << _y << " ";
 }
 
 double Shape::area()

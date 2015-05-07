@@ -20,9 +20,9 @@ double Rectangle::area()
 
 void Rectangle::print(ostream& os)
 {
-    os << "RECTANGLE: ";
+    os << RECTANGLE << " ";
     Shape::print(os);
-    os << "(" << _width << "," << _height << ")";
+    os << _width << " " << _height;
 }
 
 Rectangle *Rectangle::clone() const

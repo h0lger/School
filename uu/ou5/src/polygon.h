@@ -1,4 +1,6 @@
 #ifndef POLYGON_H
+#define POLYGON_H
+#define POLYGON "POLYGON"
 #include "shape.h"
 #include "vertex.h"
 

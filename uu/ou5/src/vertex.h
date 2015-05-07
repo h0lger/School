@@ -1,6 +1,8 @@
 #ifndef VERTEX_H
 #define VERTEX_H
+#define VERTEX VERTEX
 #include <iostream>
+
 
 class Vertex
 {
@@ -8,7 +10,7 @@ public:
 	Vertex();
 	Vertex(const Vertex &); //kopieringskonstruktor
 	Vertex(int, int);
-	~Vertex();
+	~Vertex(); 
 
 	//metoder
 	const Vertex& operator=(const Vertex& v);

@@ -1,5 +1,6 @@
 #ifndef POINT_H
 #define POINT_H
+#define POINT "POINT"
 #include "shape.h"
 class Point : public Shape
 {

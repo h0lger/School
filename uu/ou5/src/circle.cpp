@@ -19,7 +19,7 @@ double Circle::area()
 
 void Circle::print(ostream& os)
 {
-    os << "CIRCLE: ";
+    os << CIRCLE << " ";
     Shape::print(os);
     os << _r;
 }
