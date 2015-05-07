@@ -6,6 +6,8 @@
 #include "point.h"
 #include "rectangle.h"
 #include <iostream>
+#include <string>
+#include <vector>
 
 class ShapePtr
 {

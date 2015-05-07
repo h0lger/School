@@ -7,7 +7,10 @@ Vertex::Vertex(const Vertex &v)
 	_x = v._x;
 	_y = v._y;	
 }
-Vertex::~Vertex() {}
+Vertex::~Vertex()
+{
+    //std::cout << "Vertex~" << "\n";
+}
 Vertex::Vertex(int x, int y)
 {
 	//sätt koordinater
