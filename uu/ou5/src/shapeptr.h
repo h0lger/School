@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <math.h>
 
 class ShapePtr
 {
@@ -16,6 +17,7 @@ public:
     ShapePtr(Shape *shape);
     friend std::istream& operator>>(std::istream &is, ShapePtr &s);
     friend std::ostream& operator<<(std::ostream &os, const ShapePtr &s);
+    bool CloseTo(const Vertex *v);
 private:
     Shape * _ptr;
 };

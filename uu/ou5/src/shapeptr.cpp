@@ -87,3 +87,10 @@ std::ostream& operator <<(std::ostream& os, const ShapePtr& s)
     s._ptr->print(os);
     return os;
 }
+
+bool ShapePtr::CloseTo(const Vertex *v)
+{
+    return
+            (fabs(_ptr->getX() - v->X()) <= 1) ||
+            (fabs(_ptr->getY() - v->Y()) <= 1);
+}
