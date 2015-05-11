@@ -26,13 +26,36 @@ ShapePtr::ShapePtr(Shape *shape): _ptr(shape)
     NumShapes++;
 }
 
+ShapePtr::ShapePtr(const ShapePtr &sPtr)
+{
+    if (sPtr._ptr != 0)
+        _ptr = sPtr._ptr->clone();
+    else
+        _ptr = 0;
+}
+
 ShapePtr::~ShapePtr()
 {
     NumShapes--;
+    delete _ptr;
+}
+
+const ShapePtr& ShapePtr::operator =(const ShapePtr &sPtr)
+{
+    delete _ptr;
+    if(this != &sPtr)
+    {
+        if (sPtr._ptr != 0)
+            _ptr = sPtr._ptr->clone();
+        else
+            _ptr = 0;
+    }
+
+    return *this;
 }
 
 std::istream& operator >>(std::istream& is, ShapePtr& s)
-{
+{    
     string type;
     double x, y;
     is >> type;
@@ -45,20 +68,22 @@ std::istream& operator >>(std::istream& is, ShapePtr& s)
     {        
         double size;
         is >> size;
-
-       s._ptr = new Point(x, y, size);
+        delete s._ptr;
+        s._ptr = new Point(x, y, size);
     }
     else if(type == RECTANGLE)
     {        
         double width, height;
         is >> width;
         is >> height;
+        delete s._ptr;
         s._ptr = new Rectangle(x, y, width, height);
     }
     else if(type == CIRCLE)
     {        
         double r;
         is >> r;
+        delete s._ptr;
         s._ptr = new Circle(x, y, r);
     }
     else if(type == POLYGON)
@@ -69,7 +94,7 @@ std::istream& operator >>(std::istream& is, ShapePtr& s)
         bool end = false;
         is >> vertexPos;
         vertexPos.replace(0, 1, "");
-        vector<Vertex*> vectVertex;
+        vector<Vertex> vectVertex;
         //skapa upp alla vertex
         while(!end)
         {
@@ -87,10 +112,11 @@ std::istream& operator >>(std::istream& is, ShapePtr& s)
                 is >> vertexPos; //gå till nästa
             }
 
-            vectVertex.push_back(new Vertex(vX, vY));
-
+            vectVertex.push_back(Vertex(vX, vY));
         }
+
         //skapa polygon
+        delete s._ptr;
         s._ptr = new Polygon(x, y, &vectVertex);
 
     }
@@ -115,6 +141,12 @@ bool ShapePtr::CloseTo(const Vertex *v)
     return
             (fabs(_ptr->getX() - v->X()) <= 1) ||
             (fabs(_ptr->getY() - v->Y()) <= 1);
+}
+
+ShapePtr *ShapePtr::clone() const
+{
+    ShapePtr *tmp = new ShapePtr(*this);
+    return tmp;
 }
 
 //bool ShapePtr::operator <(const ShapePtr &s)

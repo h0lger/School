@@ -9,7 +9,7 @@ class Polygon : public Shape
 {
 public:
 	Polygon(double x, double y, Vertex *vArr, int num);
-    Polygon(double x, double y, vector<Vertex*> *vect);
+    Polygon(double x, double y, vector<Vertex> *vect);
 	Polygon(const Polygon &); //kopieringskonstruktor
 	~Polygon();
 	double area(); //override

@@ -11,14 +11,14 @@ Polygon::Polygon(double x, double y, Vertex *v, int num) : Shape(x, y)
 	_count = num;
 }
 
-Polygon::Polygon(double x, double y, vector<Vertex*> *vect) : Shape(x, y)
+Polygon::Polygon(double x, double y, vector<Vertex> *vect) : Shape(x, y)
 {
     _vArr = new Vertex[vect->size()];
     int i = 0;
-    for(vector<Vertex*>::iterator iter = vect->begin();iter != vect->end();iter++)
+    for(vector<Vertex>::iterator iter = vect->begin();iter != vect->end();iter++)
     {
-        Vertex *v = *iter;
-        _vArr[i] = Vertex(*v);
+        Vertex v = *iter;
+        _vArr[i] = Vertex(v);
         i++;
     }
     _count = i;
