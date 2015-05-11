@@ -13,11 +13,18 @@
 class ShapePtr
 {
 public:
-    ShapePtr();
+    ShapePtr();    
     ShapePtr(Shape *shape);
+    ~ShapePtr();
     friend std::istream& operator>>(std::istream &is, ShapePtr &s);
     friend std::ostream& operator<<(std::ostream &os, const ShapePtr &s);
     bool CloseTo(const Vertex *v);
+    //bool operator <(const ShapePtr &s);
+
+    static bool SortBySize(const ShapePtr &s1, const ShapePtr &s2);
+    static bool SortByXPos(const ShapePtr &s1, const ShapePtr &s2);
+    static bool SortByYPos(const ShapePtr &s1, const ShapePtr &s2);
+    static int NumShapes;
 private:
     Shape * _ptr;
 };

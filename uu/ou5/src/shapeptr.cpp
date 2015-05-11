@@ -1,12 +1,34 @@
 #include "shapeptr.h"
 
-ShapePtr::ShapePtr()
+int ShapePtr::NumShapes = 0;
+
+bool ShapePtr::SortBySize(const ShapePtr &s1, const ShapePtr &s2)
 {
+    return s1._ptr->area() < s2._ptr->area();
+}
+
+bool ShapePtr::SortByXPos(const ShapePtr &s1, const ShapePtr &s2)
+{
+    return s1._ptr->getX() < s2._ptr->getX();
+}
+
+bool ShapePtr::SortByYPos(const ShapePtr &s1, const ShapePtr &s2)
+{
+    return s1._ptr->getY() < s2._ptr->getY();
+}
+
+ShapePtr::ShapePtr()
+{    
     _ptr = 0;
 }
 ShapePtr::ShapePtr(Shape *shape): _ptr(shape)
 {
+    NumShapes++;
+}
 
+ShapePtr::~ShapePtr()
+{
+    NumShapes--;
 }
 
 std::istream& operator >>(std::istream& is, ShapePtr& s)
@@ -94,3 +116,8 @@ bool ShapePtr::CloseTo(const Vertex *v)
             (fabs(_ptr->getX() - v->X()) <= 1) ||
             (fabs(_ptr->getY() - v->Y()) <= 1);
 }
+
+//bool ShapePtr::operator <(const ShapePtr &s)
+//{
+//    return false;
+//}
