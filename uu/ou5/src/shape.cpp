@@ -1,19 +1,23 @@
 #include "shape.h"
+#include "shapeptr.h"
 
 Shape::Shape(double x, double y)
 {
+    //ShapePtr::NumShapes++;
 	_x = x;
 	_y = y;
 }
 
 Shape::Shape(const Shape &s)
 {
+    //ShapePtr::NumShapes++;
 	_x = s._x;
 	_y = s._y;
 }
 
 Shape::~Shape()
-{	
+{
+    //ShapePtr::NumShapes--;
 	_x = 0;
 	_y = 0;
 }

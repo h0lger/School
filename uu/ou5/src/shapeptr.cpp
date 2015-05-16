@@ -18,16 +18,18 @@ bool ShapePtr::SortByYPos(const ShapePtr &s1, const ShapePtr &s2)
 }
 
 ShapePtr::ShapePtr()
-{    
+{
+    ShapePtr::NumShapes++;
     _ptr = 0;
 }
 ShapePtr::ShapePtr(Shape *shape): _ptr(shape)
 {
-    NumShapes++;
+    ShapePtr::NumShapes++;
 }
 
 ShapePtr::ShapePtr(const ShapePtr &sPtr)
 {
+    ShapePtr::NumShapes++;
     if (sPtr._ptr != 0)
         _ptr = sPtr._ptr->clone();
     else
@@ -148,8 +150,3 @@ ShapePtr *ShapePtr::clone() const
     ShapePtr *tmp = new ShapePtr(*this);
     return tmp;
 }
-
-//bool ShapePtr::operator <(const ShapePtr &s)
-//{
-//    return false;
-//}
